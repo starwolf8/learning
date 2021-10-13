@@ -11,3 +11,5 @@ services:
     #   - SERVER_ADDRESS
     env_file:
       - app.env
+    volumes:
+      - ./logs:/app/logs
