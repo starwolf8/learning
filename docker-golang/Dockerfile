@@ -11,5 +11,8 @@ RUN go mod verify
 
 EXPOSE $PORT
 
-CMD ["go", "run", "main.go"]
+ARG OS
+ARG ARCH
+RUN env GOOS=$OS goarch=$ARCH go build -o docker-golang .
 
+CMD ["./docker-golang"]
