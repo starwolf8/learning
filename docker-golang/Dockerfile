@@ -1,5 +1,7 @@
 FROM golang:latest
 
+ENV PORT 8080
+
 WORKDIR /app
 
 ADD . /app/
@@ -7,7 +9,7 @@ ADD . /app/
 RUN go mod tidy
 RUN go mod verify
 
-EXPOSE 8080
+EXPOSE $PORT
 
 CMD ["go", "run", "main.go"]
 

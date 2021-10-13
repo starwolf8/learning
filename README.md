@@ -11,4 +11,5 @@ a collection of miscellaneous software files for learning and training purposes.
         - terminal commands: 
             - build cmd: docker build -t <image-name> .
             - run image: docker run -p 8080:8080 -it <image-name>
-        
+    - docker commands: 
+        - run: docker run -d --env-file envlist.txt -p <port>:<port> -it <image-name>
