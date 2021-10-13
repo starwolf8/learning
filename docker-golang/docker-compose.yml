@@ -13,3 +13,7 @@ services:
       - app.env
     volumes:
       - ./logs:/app/logs
+    links:
+      - redis
+  redis:
+      image: redis:alpine

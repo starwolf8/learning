@@ -17,6 +17,8 @@ func init() {
 		log.Fatal("cannot load config:", err)
 	}
 
+	util.InitializeRedis()
+
 }
 
 func main() {
