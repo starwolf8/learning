@@ -1,17 +1,12 @@
-FROM golang:latest
-
-ENV PORT 8080
-
+FROM golang:latest as builder
 WORKDIR /app
-
 ADD . /app/
-
-RUN go mod tidy
-RUN go mod verify
-
-EXPOSE $PORT
-
 RUN go build -o docker-golang
+
+# FROM alpine/latest
+FROM scratch
+WORKDIR /app
+COPY --from=builder /app/docker-golang .
 
 # ARG OS
 # ARG ARCH
