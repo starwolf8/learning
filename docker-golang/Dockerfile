@@ -7,7 +7,11 @@ RUN CGO_ENABLED=0 go build -o docker-golang
 # FROM alpine/latest
 FROM scratch
 WORKDIR /app
+
 COPY --from=builder /app/docker-golang .
+# COPY --from=builder /app/static/* ./static/
+# COPY --from=builder /app/templates/* ./templates/
+# COPY --from=builder /app/app.env .
 
 # ARG OS
 # ARG ARCH

@@ -5,21 +5,25 @@ import (
 	"main/util"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
-func main() {
-
-	config, err := util.LoadConfig(".")
+func init() {
+	_, err := util.LoadConfig(".")
 	if err != nil {
 		log.Fatal("cannot load config:", err)
 	}
 
-	log.Println("Application running in environment: ",
-		config.RuntimeSetup, " and on port: ", config.AppPort)
+}
 
-	var router *gin.Engine
-	router = gin.Default()
+func main() {
+
+	log.Println("Application running in environment: ", viper.GetString("RUNTIME_SETUP"),
+		" and on port: ", viper.GetString("APP_PORT"))
+
+	var router *gin.Engine = gin.Default()
 	router.Static("/", "./static")
-	router.Run(config.ServerAddress + ":" + config.AppPort)
+	router.Run(viper.GetString("SERVER_ADDRESS") + ":" +
+		viper.GetString("APP_PORT"))
 
 }
