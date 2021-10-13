@@ -1,7 +1,8 @@
 FROM golang:latest as builder
 WORKDIR /app
 ADD . /app/
-RUN go build -o docker-golang
+# Include command CGO_ENABLED=0 to build statically linked images
+RUN CGO_ENABLED=0 go build -o docker-golang
 
 # FROM alpine/latest
 FROM scratch
