@@ -13,7 +13,7 @@ a collection of miscellaneous software files for learning and training purposes.
             - build cmd: docker build -t <image-name> .
             - run image: docker run -p 8080:8080 -it <image-name>
     - docker commands: 
-        - run: docker run -d --env-file envlist.txt -p <port>:<port> -it <image-name>
+        - run: docker run -d -p <port>:<port> -it <image-name>
         - build: docker build --build-arg OS=linux --build-arg ARCH=${arch} -t docker-golang_${arch} .
             - replace ${arch} with amd64 as an example
 - 3. Building a multi-Arch Docker Image

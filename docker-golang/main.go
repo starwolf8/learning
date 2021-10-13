@@ -2,19 +2,24 @@ package main
 
 import (
 	"log"
-	"os"
+	"main/util"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 
+	config, err := util.LoadConfig(".")
+	if err != nil {
+		log.Fatal("cannot load config:", err)
+	}
+
 	log.Println("Application running in environment: ",
-		os.Getenv("RUNTIME_SETUP"), " and on port: ", os.Getenv("PORT"))
+		config.RuntimeSetup, " and on port: ", config.AppPort)
 
 	var router *gin.Engine
 	router = gin.Default()
 	router.Static("/", "./static")
-	router.Run()
+	router.Run(config.ServerAddress + ":" + config.AppPort)
 
 }
