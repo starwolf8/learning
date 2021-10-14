@@ -5,8 +5,11 @@ ADD . /app/
 RUN CGO_ENABLED=0 go build -o docker-golang
 
 # FROM alpine/latest
-FROM scratch
+# Can interface with docker container with this command
+# cmd: docker exec -it <container id> bash
+FROM alpine:latest
 WORKDIR /app
+RUN apk add --no-cache bash
 
 COPY --from=builder /app/docker-golang .
 # COPY --from=builder /app/static/* ./static/
