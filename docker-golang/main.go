@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"main/util"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -27,7 +28,10 @@ func main() {
 		" and on port: ", viper.GetString("APP_PORT"))
 
 	var router *gin.Engine = gin.Default()
-	router.Static("/", "./static")
+	// router.Static("/", "./static")
+	router.GET("/hello", func(c *gin.Context) {
+		c.String(http.StatusOK, "Hello World!")
+	})
 	router.Run(viper.GetString("SERVER_ADDRESS") + ":" +
 		viper.GetString("APP_PORT"))
 
