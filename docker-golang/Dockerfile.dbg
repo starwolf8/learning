@@ -1,34 +1,12 @@
-FROM golang
-ENV GOPATH /go
-ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+FROM golang:latest as builder
+
 WORKDIR /app
-EXPOSE 8080 2345
-RUN go get github.com/go-delve/delve
+
 ADD . /app/
 
-COPY . .
+RUN go get github.com/go-delve/delve
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 RUN CGO_ENABLED=0 go build -o docker-golang
 
-CMD ["dlv", "debug", "app", "--headless", "--listen=:2345", "--api-version=2", "--log"]
-
-
-# FROM golang:latest as builder
-
-# # ENV GOPATH /go
-# # ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
-
-# # add delve debugger
-# RUN go get github.com/go-delve/delve
-# RUN go install github.com/go-delve/delve/cmd/dlv@latest
-
-# WORKDIR /app
-# ADD . /app/
-
-# # Copy everything from the current directory to the working directory inside the container
-# # (as set by WORKDIR)
-#  COPY . .
-
-#  EXPOSE 8080
-# # Include command CGO_ENABLED=0 to build statically linked images
-# # RUN CGO_ENABLED=0 go build -o docker-golang
+CMD ["dlv","--listen=:2345","--headless=true","--log-dest=log.txt","--api-version=2","--accept-multiclient","exec","./docker-golang"]

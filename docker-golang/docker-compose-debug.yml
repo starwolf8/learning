@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile.dbg
     ports:
       - 8080:8082
+      - 2345:2345
     security_opt:
       - "seccomp:unconfined"
     env_file:
