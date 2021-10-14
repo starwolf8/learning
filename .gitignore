@@ -16,3 +16,4 @@
 */vendor/
 *logs.txt
 */.vscode/launch.json
+*/fluentd/output/*

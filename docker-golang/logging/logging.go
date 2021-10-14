@@ -15,13 +15,13 @@ type LoggerClass struct {
 func SetUpLogging() {
 	AppLog = &LoggerClass{}
 	AppLog.Log = logrus.New()
-	file, err := os.OpenFile(
+	/*file, err := os.OpenFile(
 		"logs/logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		AppLog.Log.Fatal(err)
-	}
+	}*/
 
-	AppLog.Log.SetOutput(file)
+	AppLog.Log.SetOutput(os.Stdout)
 	AppLog.Log.SetFormatter(&logrus.JSONFormatter{})
 
 }
