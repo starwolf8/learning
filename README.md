@@ -1,4 +1,4 @@
-# learning
+# Learning
 a collection of miscellaneous software files for learning and training purposes. 
 
 - 1. Initialize the program
