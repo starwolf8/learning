@@ -1,5 +1,6 @@
 package main
 
+// reference: https://yourbasic.org/golang/goroutines-explained/
 import (
 	"fmt"
 	"time"
